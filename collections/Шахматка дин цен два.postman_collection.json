@@ -1,0 +1,532 @@
+{
+	"info": {
+		"_postman_id": "050b3061-d9fc-4341-85a4-cf2a918e7874",
+		"name": "Шахматка дин цен два",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43239998"
+	},
+	"item": [
+		{
+			"name": "Сохранение модальника ячейки (авторежим)",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryId\": 122,\r\n    \"tariffId\": 84,\r\n    \"date\": \"2025-03-19\",\r\n    \"mode\": \"auto\",\r\n    \"recommendation\": null,\r\n    \"priceLevel\": 5,\r\n    \"customPrices\": {\"B:A:4\" : 130000},\r\n    \"basePrices\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://lk-dev-4186.dev-k8s.br-onl.ru/dynamic-price-board/board/save?user_code=1bb357ccb54af265c2ae434c33d057d2&module_id=3701",
+					"protocol": "https",
+					"host": [
+						"lk-dev-4186",
+						"dev-k8s",
+						"br-onl",
+						"ru"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"save"
+					],
+					"query": [
+						{
+							"key": "user_code",
+							"value": "1bb357ccb54af265c2ae434c33d057d2"
+						},
+						{
+							"key": "module_id",
+							"value": "3701"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Сохранение модальника ячейки (ручной режим)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryId\": 805,\r\n    \"tariffId\": 592,\r\n    \"date\": \"2025-03-20\",\r\n    \"mode\": \"manual\",\r\n    \"recommendation\": null,\r\n    \"priceLevel\": 101,\r\n    \"customPrices\": {\"B:A:4\" : 22000},\r\n    \"basePrices\": []\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lk-dev-4186.dev-k8s.br-onl.ru/dynamic-price-board/board/save",
+					"protocol": "http",
+					"host": [
+						"lk-dev-4186",
+						"dev-k8s",
+						"br-onl",
+						"ru"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Сохранение модальника ячейки (ручной режим + принятие рекомендации)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryId\": 805,\r\n    \"tariffId\": 592,\r\n    \"date\": \"2025-03-25\",\r\n    \"mode\": \"manual\",\r\n    \"recommendation\": \"apply\",\r\n    \"priceLevel\": 10,\r\n    \"customPrices\": {\"B:A:4\" : 150000},\r\n    \"basePrices\": []\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lk-dev-4186.dev-k8s.br-onl.ru/dynamic-price-board/board/save",
+					"protocol": "http",
+					"host": [
+						"lk-dev-4186",
+						"dev-k8s",
+						"br-onl",
+						"ru"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение модальника ячейки",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lk-dev-4186.dev-k8s.br-onl.ru/dynamic-price-board/board-modal/cells?date=2025-03-18&categoryId=122&tariffId=84",
+					"protocol": "http",
+					"host": [
+						"lk-dev-4186",
+						"dev-k8s",
+						"br-onl",
+						"ru"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board-modal",
+						"cells"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2025-03-18"
+						},
+						{
+							"key": "categoryId",
+							"value": "122"
+						},
+						{
+							"key": "tariffId",
+							"value": "84"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение модальника уровней цен",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board-modal/price-level?categoryId=122",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board-modal",
+						"price-level"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "122"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение модальника режима ценообразования",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board-modal/price-mode?categoryId=122",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board-modal",
+						"price-mode"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "122"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение модальника рекомендаций",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board-modal/recommendation?categoryId=122",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board-modal",
+						"recommendation"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "122"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение списка рекомендаций",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board-modal/recommendation-list?period[0][start]=2025-03-18&period[0][end]=2025-03-24&period[1][start]=2025-03-29&period[1][end]=2025-04-3&weekDays[]=1&weekDays[]=2&weekDays[]=5&weekDays[]=6&categoryId=122&tariffList[]=84&tariffList[]=85",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board-modal",
+						"recommendation-list"
+					],
+					"query": [
+						{
+							"key": "period[0][start]",
+							"value": "2025-03-18"
+						},
+						{
+							"key": "period[0][end]",
+							"value": "2025-03-24"
+						},
+						{
+							"key": "period[1][start]",
+							"value": "2025-03-29"
+						},
+						{
+							"key": "period[1][end]",
+							"value": "2025-04-3"
+						},
+						{
+							"key": "weekDays[]",
+							"value": "1"
+						},
+						{
+							"key": "weekDays[]",
+							"value": "2"
+						},
+						{
+							"key": "weekDays[]",
+							"value": "5"
+						},
+						{
+							"key": "weekDays[]",
+							"value": "6"
+						},
+						{
+							"key": "categoryId",
+							"value": "122"
+						},
+						{
+							"key": "tariffList[]",
+							"value": "84"
+						},
+						{
+							"key": "tariffList[]",
+							"value": "85"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Сохранение модальника уровней цен",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"period\": [\r\n        {\r\n            \"start\": \"2025-03-18\",\r\n            \"end\": \"2025-03-24\"\r\n        },\r\n        {\r\n            \"start\": \"2025-03-29\",\r\n            \"end\": \"2025-04-3\"\r\n        }\r\n   ],\r\n   \"weekDays\": [1,2,5,6],\r\n   \"categoryId\": \"805\",\r\n   \"tariffIDs\": [84, 85],\r\n   \"priceLevel\": 10\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lk-dev-4186.dev-k8s.br-onl.ru/dynamic-price-board/board/save-price-levels",
+					"protocol": "http",
+					"host": [
+						"lk-dev-4186",
+						"dev-k8s",
+						"br-onl",
+						"ru"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"save-price-levels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Сохранение модальника режима ценообразования (авто)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"period\": [\r\n        {\r\n            \"start\": \"2025-03-18\",\r\n            \"end\": \"2025-03-24\"\r\n        },\r\n        {\r\n            \"start\": \"2025-03-29\",\r\n            \"end\": \"2025-04-3\"\r\n        }\r\n   ],\r\n   \"weekDays\": [1,2,5,6],\r\n   \"categoryId\": 122,\r\n   \"tariffIDs\": [84, 85],\r\n   \"mode\": \"auto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board/save-price-mode",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"save-price-mode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Сохранение модальника режима ценообразования (ручной)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"period\": [\r\n        {\r\n            \"start\": \"2025-03-18\",\r\n            \"end\": \"2025-03-24\"\r\n        },\r\n        {\r\n            \"start\": \"2025-03-29\",\r\n            \"end\": \"2025-04-3\"\r\n        }\r\n   ],\r\n   \"weekDays\": [1,2,5,6],\r\n   \"categoryId\": 122,\r\n   \"tariffIDs\": [84, 85],\r\n   \"mode\": \"manual\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board/save-price-mode",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"save-price-mode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Сохранение модальника рекомендаций",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"acceptRecommendation\": true,\r\n    \"recommendations\": [\r\n        {\r\n            \"categoryId\": 122,\r\n            \"tariffId\": 85,\r\n            \"date\": \"2025-03-18\",\r\n            \"ruleId\": 21\r\n        },\r\n        {\r\n            \"categoryId\": 122,\r\n            \"tariffId\": 85,\r\n            \"date\": \"2025-03-21\",\r\n            \"ruleId\": 21\r\n        },\r\n        {\r\n            \"categoryId\": 122,\r\n            \"tariffId\": 85,\r\n            \"date\": \"2025-03-24\",\r\n            \"ruleId\": 21\r\n        },\r\n        {\r\n            \"categoryId\": 122,\r\n            \"tariffId\": 85,\r\n            \"date\": \"2025-03-29\",\r\n            \"ruleId\": 21\r\n        },\r\n        {\r\n            \"categoryId\": 122,\r\n            \"tariffId\": 85,\r\n            \"date\": \"2025-03-31\",\r\n            \"ruleId\": 21\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board/save-price-recommendation",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"save-price-recommendation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение количества рекомендаций",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board/recommendation-count?categoryId=122",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"recommendation-count"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "122"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение списка категорий",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lk-dev-4186.dev-k8s.br-onl.ru/dynamic-price-board/board/categories",
+					"protocol": "http",
+					"host": [
+						"lk-dev-4186",
+						"dev-k8s",
+						"br-onl",
+						"ru"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение цен шахматки",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://biz.znaimesta.localhost/dynamic-price-board/board/prices?categoryId=122&startDate=2025-03-19\n&endDate=2025-04-08\n&tariffIds[]=84&tariffIds[]=85&tariffIds[]=592",
+					"protocol": "http",
+					"host": [
+						"biz",
+						"znaimesta",
+						"localhost"
+					],
+					"path": [
+						"dynamic-price-board",
+						"board",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "122"
+						},
+						{
+							"key": "startDate",
+							"value": "2025-03-19\n"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-04-08\n"
+						},
+						{
+							"key": "tariffIds[]",
+							"value": "84"
+						},
+						{
+							"key": "tariffIds[]",
+							"value": "85"
+						},
+						{
+							"key": "tariffIds[]",
+							"value": "592"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
