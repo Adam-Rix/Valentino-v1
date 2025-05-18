@@ -76,7 +76,7 @@ def validate_structure(expected, actual, path=""):
 
             else:
                 validate_structure(expected[key], actual[key], path + f".{key}")
-                print(f"✅ Matched with Etalon key at {path or 'root'}: {key}")
+                print(f"✅ Matched with Reference key at {path or 'root'}: {key}")
 
     elif isinstance(expected, list) and isinstance(actual, list):
         for i, (exp, act) in enumerate(zip(expected, actual)):
