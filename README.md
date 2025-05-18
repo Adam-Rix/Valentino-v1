@@ -5,37 +5,37 @@ It compares real server responses to stored example responses and validates the 
 ---
 
 ## Valentino_v1_0.py  
-Main runner script.  
+Main runner script:  
 
-- Uses `pytest` with parameterized input for the collection path.  
-- Loads `.env` variables using `python-dotenv`.  
+- Uses `pytest` with parameterized input for the collection path;  
+- Loads `.env` variables using `python-dotenv`;  
 - Entry point for executing all validation logic.
 
 ---
 
 ## JPars.py  
-Core parser and validator.  
+Core parser and validator:  
 
 - Parses the collection and builds structured items;  
 - Sends all requests asynchronously using `httpx`;  
 - Matches real responses with `example_responses` from the collection;  
-- Supports both strict and structural validation (key presence).  
+- Supports both strict and structural validation (key presence);  
 - Skips non-JSON responses gracefully.
 
 ---
 
 ## parser_itself.py  
-Parses Postman collections.
+Parses Postman collections:
 
 - Extracts method, URL, headers, body;  
 - Converts local URLs to remote (e.g., replaces `localhost` to your domain with .env help);  
-- Collects example responses (`code`, `body`) for future comparison.  
+- Collects example responses (`code`, `body`) for future comparison;
 - Prints parsing summary.
 
 ---
 
 ## requester.py  
-Handles sending HTTP requests.
+Handles sending HTTP requests:
 
 - Adds required headers, cookies, and token;  
 - Ensures HTTPS is used even if collection uses HTTP;  
@@ -46,7 +46,7 @@ Handles sending HTTP requests.
 ---
 
 ## .env  
-Holds environment configuration.
+Holds environment configuration:
 ```env
 PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
 ```
@@ -88,4 +88,4 @@ PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
 
 5. Finalize: 🛠
    6.1 Cleanup structure & docstrings; 🛠  
-   6.2 Prepare for packaging as CLI tool; ⏳  
+   6.2 Prepare for packaging as CLI tool. ⏳  
