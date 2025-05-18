@@ -7,8 +7,9 @@ import os
 import pytest
 import asyncio
 
-# Getting envs
-dotenv_path = r"D:\ProjectsPyY\Newideas\Valentino_v1\Envs\.env"
+
+'''Use path to your .env file'''
+dotenv_path = r"*here*"
 load_dotenv(dotenv_path, override=True)
 
 '''Debug print from .env'''
