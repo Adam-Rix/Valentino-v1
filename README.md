@@ -51,7 +51,7 @@ Holds environment configuration:
 PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
 ```
 
---
+---
 
 ## Example of Output
 🧪 Starting test for: some.json; \
@@ -63,7 +63,7 @@ PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
 ❌ Missing key at .data[3]: defaultValue \
 **FOR EACH RESPONSE**
 
---
+---
 
 ## Tech Plan:
 
@@ -71,21 +71,21 @@ PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
    1.1 Collecting request bodies; ✅  
    1.2 Parsing example responses; ✅  
    1.3 Replacing non-JSON responses with response codes (200, 300, etc.); ✅  
-
+---
 2. Create async engine for request validation: ☑️  
    2.1 Use `httpx.AsyncClient` for concurrency; ✅  
    2.2 Parametrize collection paths via `.env`; ✅  
    2.3 Wrap logic in `async def Gettig_Json()`: ✅  
-
+---
 3. Validate response structure (not full match): ☑️  
    3.1 Match field presence only (via tree walk); ✅  
    3.2 Detect missing keys & type mismatches; ✅  
    3.3 Add exception handling & debug printing; ✅  
-
+---
 4. Enhance result output: ☑️  
    4.1 Color-coded validation results (✅/❌); ✅ \
    4.2 Export validation logs to file (JSON/HTML); ✅  
-
-5. Finalize: 🛠
-   6.1 Cleanup structure & docstrings; 🛠  
+---
+5. Finalize the EPIC: 🛠 \
+   6.1 Cleanup structure & docstrings; 🛠  \
    6.2 Prepare for packaging as CLI tool. ⏳  
