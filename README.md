@@ -1,6 +1,6 @@
 # Valentino  
 Valentino is an asynchronous API contract validator that works with Postman collections.  
-It compares real server responses to stored example responses and validates the structure.
+It compares real server responses to prepared in advance example responses and validates the entire structure of server's responses.
 
 ---
 
