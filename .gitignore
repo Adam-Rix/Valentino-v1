@@ -1,11 +1,13 @@
 resources/config.yml
 
-# without content FROM folders BUT .gitkeep
+# without content FROM folders BUT .gitkeep and __init__.py
 collections/*
-!collections/.gitkeep,__init__.py
+!collections/.gitkeep
+!collections/__init__.py
 
 Envs/*
-!Envs/.gitkeep,__init__.py
+!Envs/.gitkeep
+!collections/__init__.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
