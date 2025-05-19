@@ -1,13 +1,22 @@
 # requester.py
 # v1.0.0
 import logging
-import json
 import os
+import json
 
 # logger
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
+# Load cookies from JSON path
+def load_cookies(path):
+    if not path:
+        raise ValueError("⚠️ PATH_TO_COOKIES not set in environment variables.")
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 async def send_request(client, item):
+    cookies = load_cookies(path=os.getenv("PATH_TO_COOKIES"))
+
     method = item.get("method", "GET").upper()
     url = item["url"]
     headers = item.get("headers", {}).copy()
@@ -17,7 +26,7 @@ async def send_request(client, item):
     if url.startswith("http://"):
         url = url.replace("http://", "https://", 1)
 
-    # token if requested
+    # token if Token is needed
     # if "Authorization" not in headers and item.get("auth", {}).get("type") == "bearer":
     #     token = os.getenv("TOKEN")
     #     headers["Authorization"] = f"Bearer {token}"
@@ -28,13 +37,13 @@ async def send_request(client, item):
     # headers.setdefault("Connection",
     #                    os.getenv("CONNECTION"))
 
-    # hard-coded cookies
-    cookies = {
-        "PHPSESSID": os.getenv("PHPSESSID"),
-        "_csrf": os.getenv("_csrf"),
-        "_identity-biz": os.getenv("_identity-biz"),
-        "module_id": os.getenv("MODULE_ID")
-    }
+    # if hard-coded cookies is needed
+    # cookies = {
+    #     "PHPSESSID": os.getenv("PHPSESSID"),
+    #     "_csrf": os.getenv("_csrf"),
+    #     "_identity-biz": os.getenv("_identity-biz"),
+    #     "module_id": os.getenv("MODULE_ID")
+    # }
 
     try:
         response = await client.request(
