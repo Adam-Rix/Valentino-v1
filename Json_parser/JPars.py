@@ -1,9 +1,10 @@
 # JPars.py
 # v1.0.0
-
 import asyncio
 import json
 import httpx
+import os
+
 from Valentino_v1.Json_parser.parser_itself import parse_collection
 from Valentino_v1.request_sender.requester import send_request
 
@@ -12,53 +13,72 @@ class JParser:
         self.collection_path = collection_path
 
     async def Gettig_Json(self):
-        with open(self.collection_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
 
-        # Parse each request and example of response
-        items = parse_collection(data)
+        files = []
 
-        #  create async client
-        async with httpx.AsyncClient(timeout=15) as client:
-            # create coroutine (list of async tasks)
-            tasks = [send_request(client, item) for item in items]
-            responses = await asyncio.gather(*tasks) #wait while all will be ended
+        if os.path.isdir(self.collection_path):
 
-        # sorting through pairs
-        for item, response in zip(items, responses):
-            url = item.get("url")
-            print(f"\n[🔍] Validating structure for: {url}")
+            files = [
+                os.path.join(self.collection_path, f)
+                for f in os.listdir(self.collection_path)
+                if f.endswith(".json")
+            ]
 
-            if response is None:
-                print("[❌] No response received.")
-                continue
+        elif os.path.isfile(self.collection_path):
+            files = [self.collection_path]
 
-            try:
-                actual_json = response.json()
-            except Exception:
-                print(f"[⚠️] Non-JSON response from {url} ({response.status_code}):\n⚠️⚠️⚠️SKIPPED⚠️⚠️⚠️")
-                continue
+        else:
+            print(f"\n smth went wrong with: {self.collection_path}")
 
-            # generator which searchs and returns examples with code == 200 or none if generator is empty
-            expected_response = next(
-                (r for r in item.get("example_responses", []) if r.get("code") == 200),
-                None
-            )
+        for file in files:
+            print(f"\n🧪 Processing collection: {file}")
+            with open(file, "r", encoding="utf-8") as f:
+                data = json.load(f)
 
-            if not expected_response:
-                print("[ℹ️] No example response found for validation.")
-                continue
+            # Parse each request and example of response
+            items = parse_collection(data)
 
-            try:
-                expected_json = json.loads(expected_response.get("body", "{}"))
-                validate_structure(expected_json, actual_json)
+            #  create async client
+            async with httpx.AsyncClient(timeout=15) as client:
+                # create coroutine (list of async tasks)
+                tasks = [send_request(client, item) for item in items]
+                responses = await asyncio.gather(*tasks) #wait while all will be ended
 
-                '''Debugging prints with expected and actual responses'''
-                # print("Expected (parsed from collection):", json.dumps(expected_json, indent=2, ensure_ascii=False))
-                # print("Actual (from response):", json.dumps(actual_json, indent=2, ensure_ascii=False))
+            # sorting through pairs
+            for item, response in zip(items, responses):
+                url = item.get("url")
+                print(f"\n[🔍] Validating structure for: {url}")
 
-            except json.JSONDecodeError:
-                print("[⚠️] Example body in collection is not valid JSON.")
+                if response is None:
+                    print("[❌] No response received.")
+                    continue
+
+                try:
+                    actual_json = response.json()
+                except Exception:
+                    print(f"[⚠️] Non-JSON response from {url} ({response.status_code}):\n⚠️⚠️⚠️SKIPPED⚠️⚠️⚠️")
+                    continue
+
+                # generator which searchs and returns examples with code == 200 or none if generator is empty
+                expected_response = next(
+                    (r for r in item.get("example_responses", []) if r.get("code") == 200),
+                    None
+                )
+
+                if not expected_response:
+                    print("[ℹ️] No example response found for validation.")
+                    continue
+
+                try:
+                    expected_json = json.loads(expected_response.get("body", "{}"))
+                    validate_structure(expected_json, actual_json)
+
+                    '''Debugging prints with expected and actual responses'''
+                    # print("Expected (parsed from collection):", json.dumps(expected_json, indent=2, ensure_ascii=False))
+                    # print("Actual (from response):", json.dumps(actual_json, indent=2, ensure_ascii=False))
+
+                except json.JSONDecodeError:
+                    print("[⚠️] Example body in collection is not valid JSON.")
 
 # matching dicts and lists in memory
 def validate_structure(expected, actual, path=""):
@@ -81,4 +101,3 @@ def validate_structure(expected, actual, path=""):
     elif isinstance(expected, list) and isinstance(actual, list):
         for i, (exp, act) in enumerate(zip(expected, actual)):
             validate_structure(exp, act, path + f"[{i}]")
-

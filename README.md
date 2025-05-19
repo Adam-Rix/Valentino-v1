@@ -87,7 +87,9 @@ PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
    4.2 Export validation logs to file (JSON/HTML). ✅  
 ---
 5. Finalize the EPIC: 🛠 \
-   5.1 Cleanup structure & docstrings; 🛠  \
-   5.2 Add datatype validation; ⏳ \
-   5.3 Add multiple collection reading; ⏳ \
+   5.1 Add multiple collection reading; ✅ \
+   5.2 Add datatype validation; 🛠 \
+   5.3 Cleanup structure & docstrings; ⏳  \
    5.4 Prepare for packaging as CLI tool. ⏳
+---
+6. Port all above on php. ⏳
