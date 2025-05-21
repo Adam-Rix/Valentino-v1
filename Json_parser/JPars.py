@@ -90,14 +90,27 @@ def validate_structure(expected, actual, path=""):
             return False
 
         for key in expected:
-
             if key not in actual:
                 print(f"❌ Missing key at {path or 'root'}: {key}")
+                continue
 
+            # comparing types before recursion
+            if not isinstance(actual[key], type(expected[key])):
+                print(
+                    f"⚠️ Type mismatch at {path + '.' + key}: expected {type(expected[key]).__name__}, got {type(actual[key]).__name__}")
             else:
-                validate_structure(expected[key], actual[key], path + f".{key}")
-                print(f"✅ Matched with Reference key at {path or 'root'}: {key}")
+                print(f"✅ Matched type for key at {path or 'root'}: {key} ({type(actual[key]).__name__})")
+
+
+            # recursive nesting check
+            validate_structure(expected[key], actual[key], path + f".{key}")
+
 
     elif isinstance(expected, list) and isinstance(actual, list):
         for i, (exp, act) in enumerate(zip(expected, actual)):
             validate_structure(exp, act, path + f"[{i}]")
+
+    elif type(expected) != type(actual):
+        print(f"⚠️ Type mismatch at {path}: expected {type(expected).__name__}, got {type(actual).__name__}")
+
+    return True

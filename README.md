@@ -48,7 +48,20 @@ Handles sending HTTP requests:
 ## .env  
 Holds environment configuration:
 ```env
-PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
+#paths
+PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/FOLDER
+PATH_TO_COOKIES=PATH/TO/YOUR/.JSON/COOKIES
+
+#links
+OLD_DOMAIN=YOUR/OLD/DOMAIN (OR THE SAME AS CURRENT)
+NEW_DOMAIN=YOUR/CURRENT/DOMAIN
+
+#headers
+ACCEPT_ENCODING=IF/NEEDED
+CONNECTION==IF/NEEDED
+
+#Token
+TOKEN=YOUR/TOKEN/IF/NEEDED (DONT FORGET USE IT IN requester.py)
 ```
 
 ---
@@ -58,9 +71,9 @@ PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
 [🔍] Parsed item: GET https://.../filters — 1 example(s) \
 [🔍] Validating structure for: https://.../filters
 
-✅ Matched with Reference key at .data[0]: name \
+✅ Matched with Reference key at .data[0]: name (str) \
 **OR** \
-❌ Missing key at .data[3]: defaultValue \
+❌ Missing key at .data[3]: defaultValue (str)\
 **FOR EACH RESPONSE**
 
 ---
@@ -88,8 +101,8 @@ PATH_TO_DYNAMIC_STAND=PATH/TO/YOUR/COLLECTION/some.json
 ---
 5. Finalize the EPIC: 🛠 \
    5.1 Add multiple collection reading; ✅ \
-   5.2 Add datatype validation; 🛠 \
-   5.3 Cleanup structure & docstrings; ⏳  \
+   5.2 Add datatype validation; ✅ \
+   5.3 Cleanup structure & docstrings; 🛠  \
    5.4 Prepare for packaging as CLI tool. ⏳
 ---
-6. Port all above on php. ⏳
+6. Port all above on **php 8.3** . ⏳
