@@ -23,7 +23,9 @@ Core parser and validator:
 - Skips non-JSON responses gracefully.
 
 # 🧪 Example Postman Collections
-You can find a sample Postman collection [here](https://github.com/Adam-Rix/Valentino-v1/tree/main/collections).
+You can find a sample Postman collection [here](https://github.com/Adam-Rix/Valentino-v1/tree/main/collections). 
+**BUT DELETE IT BEFORE USING**
+**IT WILL WORK ONLY  WITH USABLE COLLECTIONS**
 
 ---
 
