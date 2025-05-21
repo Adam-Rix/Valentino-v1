@@ -22,6 +22,9 @@ Core parser and validator:
 - Supports both strict and structural validation (key presence);  
 - Skips non-JSON responses gracefully.
 
+````
+You can find a sample collection [here](Valentino_v1\collections\Example_of_collection.json).
+````
 ---
 
 ## parser_itself.py  

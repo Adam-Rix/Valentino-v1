@@ -1,0 +1,23 @@
+{
+  "info": {
+    "name": "Nutrition Report Example",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get General Filters",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://example.local/api/report/general/filters"
+        }
+      },
+      "response": [
+        {
+          "code": 200,
+          "body": "{ \"data\": [ { \"name\": \"filterDateFrom\" }, ... ] }"
+        }
+      ]
+    }
+  ]
+}

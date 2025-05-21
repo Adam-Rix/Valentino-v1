@@ -4,6 +4,7 @@ resources/config.yml
 collections/*
 !collections/.gitkeep
 !collections/__init__.py
+!collections/Example_of_collection.json
 
 Envs/*
 !Envs/.gitkeep
