@@ -102,7 +102,7 @@ TOKEN=YOUR/TOKEN/IF/NEEDED (DONT FORGET USE IT IN requester.py)
 ---
 4. Enhance result output: ☑️  
    4.1 Color-coded validation results (✅/❌); ✅ \
-   4.2 Export validation logs to file (JSON/HTML). ✅  
+   4.2 Export validation logs to file (JSON). ✅  
 ---
 5. Finalize the EPIC: 🛠 \
    5.1 Add multiple collection reading; ✅ \
