@@ -22,9 +22,9 @@ Core parser and validator:
 - Supports both strict and structural validation (key presence);  
 - Skips non-JSON responses gracefully.
 
-````
-You can find a sample collection [here](https://github.com/Adam-Rix/Valentino-v1/tree/main/collections).
-````
+# 🧪 Example Postman Collections
+You can find a sample Postman collection [here](https://github.com/Adam-Rix/Valentino-v1/tree/main/collections).
+
 ---
 
 ## parser_itself.py  
