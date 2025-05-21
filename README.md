@@ -23,7 +23,7 @@ Core parser and validator:
 - Skips non-JSON responses gracefully.
 
 ````
-You can find a sample collection [here](Valentino_v1\collections\Example_of_collection.json).
+You can find a sample collection [here](https://github.com/Adam-Rix/Valentino-v1/tree/main/collections).
 ````
 ---
 
