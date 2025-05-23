@@ -35,10 +35,11 @@ def parse_collection(data):
                 json.loads(body_raw)  # Is that valid?
                 example_responses.append({
                     "code": code,
-                    "body": body_raw
+                    "body": body_raw,
+                    "originalRequest": resp.get("originalRequest", {})
                 })
             except json.JSONDecodeError:
-                continue  # SKIP in invalid
+                continue  # SKIP if invalid
 
         # Structure of saved response from server
         result.append({

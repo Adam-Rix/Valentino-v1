@@ -15,18 +15,14 @@ class JParser:
     async def Gettig_Json(self):
 
         files = []
-
         if os.path.isdir(self.collection_path):
-
             files = [
                 os.path.join(self.collection_path, f)
                 for f in os.listdir(self.collection_path)
                 if f.endswith(".json")
             ]
-
         elif os.path.isfile(self.collection_path):
             files = [self.collection_path]
-
         else:
             print(f"\n smth went wrong with: {self.collection_path}")
 
@@ -53,20 +49,34 @@ class JParser:
                     print("[❌] No response received.")
                     continue
 
+                expected_response = next(iter(item.get("example_responses", [])), None)
+
+                if not expected_response:
+                    print("[ℹ️] No example response found for validation.")
+                    continue
+
+                # Method validation
+                expected_method = expected_response.get("originalRequest", {}).get("method")
+                actual_method = response.request.method.upper()
+                if expected_method != actual_method:
+                    print(f"❌ Method mismatch: expected {expected_method}, got {actual_method}")
+                else:
+                    print(f"✅ Matched request method: {actual_method}")
+
+
+                # Status code validation
+                expected_code = expected_response.get("code")
+                actual_code = response.status_code
+                if expected_code != actual_code:
+                    print(f"❌ Status code mismatch: expected {expected_code}, got {actual_code}")
+                    continue
+                else:
+                    print(f"✅ Matched status code: {actual_code}")
+
                 try:
                     actual_json = response.json()
                 except Exception:
                     print(f"[⚠️] Non-JSON response from {url} ({response.status_code}):\n⚠️⚠️⚠️SKIPPED⚠️⚠️⚠️")
-                    continue
-
-                # generator which searchs and returns examples with code == 200 or none if generator is empty
-                expected_response = next(
-                    (r for r in item.get("example_responses", []) if r.get("code") == 200),
-                    None
-                )
-
-                if not expected_response:
-                    print("[ℹ️] No example response found for validation.")
                     continue
 
                 try:
@@ -76,9 +86,10 @@ class JParser:
                     '''Debugging prints with expected and actual responses'''
                     # print("Expected (parsed from collection):", json.dumps(expected_json, indent=2, ensure_ascii=False))
                     # print("Actual (from response):", json.dumps(actual_json, indent=2, ensure_ascii=False))
-
                 except json.JSONDecodeError:
                     print("[⚠️] Example body in collection is not valid JSON.")
+                except Exception as e:
+                    print(f"[⚠️] Unexpected error during validation: {e}")
 
 # matching dicts and lists in memory
 def validate_structure(expected, actual, path=""):
@@ -100,7 +111,6 @@ def validate_structure(expected, actual, path=""):
                     f"⚠️ Type mismatch at {path + '.' + key}: expected {type(expected[key]).__name__}, got {type(actual[key]).__name__}")
             else:
                 print(f"✅ Matched type for key at {path or 'root'}: {key} ({type(actual[key]).__name__})")
-
 
             # recursive nesting check
             validate_structure(expected[key], actual[key], path + f".{key}")
