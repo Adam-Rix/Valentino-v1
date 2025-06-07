@@ -108,6 +108,6 @@ TOKEN=YOUR/TOKEN/IF/NEEDED (DONT FORGET USE IT IN requester.py)
    5.1 Add multiple collection reading; ✅ \
    5.2 Add datatype validation; ✅ \
    5.3 Cleanup structure & docstrings; 🛠  \
-   5.4 Prepare for packaging as CLI tool. ⏳
+   ~~5.4 Prepare for packaging as CLI tool.~~ moved to Valentino V2 (more features and diff. logic in future)
 ---
-6. Port all above on **php 8.3** . ⏳
+~~6. Port all above on **php 8.3** .~~ moved to Valentino V2 (more features and diff. logic in future)
