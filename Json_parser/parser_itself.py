@@ -1,5 +1,5 @@
 # parser_itself.py
-# v1.0.0
+# v1.1.0
 import json
 import os
 
@@ -53,11 +53,18 @@ def parse_collection(data):
 
         summary = []
         if body:
-            summary.append("has body")
-        if body_error:
+            summary.append("✅ has body")
+        elif body_error:
             summary.append("❌ invalid JSON")
+        else:
+            summary.append("❌ invalid JSON")
+
+
         if example_responses:
-            summary.append(f"{len(example_responses)} example(s)")
+            summary.append(f"✅ {len(example_responses)} example(s) of response")
+        else:
+            summary.append(f"❌ {len(example_responses)} example of response")
+
 
         summary_text = " | ".join(summary)
         print(f"[🔍] Parsed item: {method} {url} — {summary_text}")
