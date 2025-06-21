@@ -1,5 +1,5 @@
 # parser_itself.py
-# v1.1.0
+# v1.1.1
 import json
 import os
 
@@ -39,7 +39,10 @@ def parse_collection(data):
                     "originalRequest": resp.get("originalRequest", {})
                 })
             except json.JSONDecodeError:
-                continue  # SKIP if invalid
+                continue
+                #Debug
+                # print(f"\n❌ ERROR parsing response body: {e}")
+                # print(f"Body content:\n{body_raw} \n")
 
         # Structure of saved response from server
         result.append({
@@ -53,11 +56,11 @@ def parse_collection(data):
 
         summary = []
         if body:
-            summary.append("✅ has body")
-        elif body_error:
-            summary.append("❌ invalid JSON")
+            summary.append("✅ request has body")
+        elif method.upper() in ["POST", "PUT", "PATCH"] and body is None:
+            summary.append("❌ request body is None")
         else:
-            summary.append("❌ invalid JSON")
+            summary.append("ℹ️ GET request has no body")
 
 
         if example_responses:
