@@ -25,7 +25,7 @@ Core parser and validator:
 # 🧪 Example Postman Collections
 You can find a sample Postman collection [here](https://github.com/Adam-Rix/Valentino-v1/tree/main/collections). \
 **BUT DELETE IT BEFORE USING** \
-**IT WILL WORK ONLY  WITH USABLE COLLECTIONS**
+**OR YOU WILL HAVE AN ADDITIONAL ERROR .JSON**
 
 ---
 
@@ -34,7 +34,7 @@ Parses Postman collections:
 
 - Extracts method, URL, headers, body;  
 - Converts local URLs to remote (e.g., replaces `localhost` to your domain with .env help);  
-- Collects example responses (`code`, `body`) for future comparison;
+- Collects (`code`, `(request)body`, `example_responses`) for future comparison;
 - Prints parsing summary.
 
 ---
